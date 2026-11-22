@@ -1,0 +1,155 @@
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--white);
+  box-shadow: 0 2px 15px rgba(53, 20, 109, 0.06);
+}
+
+.navbar {
+  min-height: 82px;
+  padding: 12px 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: var(--primary-purple);
+  color: var(--white);
+  font-family: var(--heading-font);
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-name {
+  color: var(--deep-purple);
+  font-family: var(--heading-font);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  margin-top: 4px;
+  color: var(--body-text);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.navbar-collapse {
+  flex-grow: 1;
+}
+
+.navbar-nav {
+  gap: 8px;
+}
+
+.nav-link {
+  padding: 10px 12px !important;
+  color: var(--dark-text);
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-purple);
+}
+
+.btn-primary-custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 10px;
+  padding: 12px 20px;
+  border: 1px solid var(--primary-purple);
+  border-radius: 8px;
+  background: var(--primary-purple);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-custom:hover {
+  border-color: var(--deep-purple);
+  background: var(--deep-purple);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.menu-toggle {
+  border: 1px solid var(--primary-purple);
+  color: var(--primary-purple);
+  font-size: 25px;
+  box-shadow: none !important;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    display: none;
+    width: 100%;
+    padding: 15px 0 8px;
+  }
+
+  .navbar-collapse.show {
+    display: block;
+  }
+
+  .navbar-nav {
+    align-items: stretch !important;
+    gap: 2px;
+  }
+
+  .nav-link {
+    padding: 11px 5px !important;
+  }
+
+  .nav-cta {
+    margin-top: 10px;
+  }
+
+  .btn-primary-custom {
+    justify-content: center;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .navbar {
+    min-height: 72px;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .brand-subtitle {
+    font-size: 8px;
+  }
+}

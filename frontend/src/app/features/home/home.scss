@@ -1,0 +1,406 @@
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0 100px;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(167, 139, 250, 0.16), transparent 30%),
+    linear-gradient(135deg, #FFFFFF 0%, #F8F6FF 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 24px;
+  padding: 9px 15px;
+  border: 1px solid rgba(108, 60, 233, 0.16);
+  border-radius: 30px;
+  background: rgba(108, 60, 233, 0.07);
+  color: var(--primary-purple);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.badge-dot,
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-purple);
+}
+
+.hero-content h1 {
+  max-width: 650px;
+  margin-bottom: 24px;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1.8px;
+}
+
+.hero-content h1 span {
+  display: block;
+  color: var(--primary-purple);
+}
+
+.hero-description {
+  max-width: 540px;
+  margin-bottom: 30px;
+  color: var(--body-text);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-primary-btn,
+.hero-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 13px 21px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.hero-primary-btn {
+  border: 1px solid var(--primary-purple);
+  background: var(--primary-purple);
+  color: var(--white);
+}
+
+.hero-primary-btn:hover {
+  border-color: var(--deep-purple);
+  background: var(--deep-purple);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.hero-secondary-btn {
+  border: 1px solid rgba(108, 60, 233, 0.25);
+  background: var(--white);
+  color: var(--deep-purple);
+}
+
+.hero-secondary-btn:hover {
+  border-color: var(--primary-purple);
+  background: var(--lavender);
+  color: var(--primary-purple);
+}
+
+.hero-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 30px;
+  color: var(--body-text);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.hero-note i {
+  color: var(--primary-purple);
+  font-size: 16px;
+}
+
+/* Hero Visual */
+
+.hero-visual-column {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 440px;
+}
+
+.visual-circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-one {
+  width: 390px;
+  height: 390px;
+  background: rgba(167, 139, 250, 0.12);
+}
+
+.circle-two {
+  width: 300px;
+  height: 300px;
+  border: 1px dashed rgba(108, 60, 233, 0.25);
+}
+
+.growth-card {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 430px);
+  padding: 27px;
+  border: 1px solid rgba(108, 60, 233, 0.10);
+  border-radius: 20px;
+  background: var(--white);
+  box-shadow: 0 25px 70px rgba(53, 20, 109, 0.13);
+}
+
+.growth-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.card-eyebrow {
+  color: var(--body-text);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.growth-card-header h3 {
+  margin: 7px 0 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.growth-icon,
+.floating-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  background: var(--lavender);
+  color: var(--primary-purple);
+  font-size: 21px;
+}
+
+.growth-chart {
+  margin-top: 28px;
+}
+
+.chart-label {
+  margin-bottom: 10px;
+  color: var(--body-text);
+  font-size: 12px;
+}
+
+.growth-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.growth-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+  margin-top: 18px;
+  padding-top: 17px;
+  border-top: 1px solid #F0ECF8;
+}
+
+.footer-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--body-text);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.indicator-two {
+  background: #A78BFA;
+}
+
+.indicator-three {
+  background: #C4B5FD;
+}
+
+.floating-card {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid #F0ECF8;
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 12px 35px rgba(53, 20, 109, 0.10);
+  color: var(--dark-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.floating-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+.floating-card-top {
+  top: 45px;
+  right: -5px;
+}
+
+.floating-card-bottom {
+  bottom: 45px;
+  left: -5px;
+}
+
+.decorative-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--light-purple);
+}
+
+.dot-one {
+  top: 65px;
+  left: 30px;
+}
+
+.dot-two {
+  right: 35px;
+  bottom: 65px;
+  width: 8px;
+  height: 8px;
+}
+
+/* Tablet */
+
+@media (max-width: 991.98px) {
+  .hero-section {
+    padding: 70px 0 80px;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-description {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .hero-actions,
+  .hero-note {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    min-height: 420px;
+    margin-top: 35px;
+  }
+
+  .floating-card-top {
+    right: 5%;
+  }
+
+  .floating-card-bottom {
+    left: 5%;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 575.98px) {
+  .hero-section {
+    padding: 55px 0 60px;
+  }
+
+  .hero-content h1 {
+    font-size: 37px;
+    letter-spacing: -1px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-primary-btn,
+  .hero-secondary-btn {
+    width: 100%;
+  }
+
+  .hero-visual {
+    min-height: 340px;
+    margin-top: 30px;
+  }
+
+  .circle-one {
+    width: 290px;
+    height: 290px;
+  }
+
+  .circle-two {
+    width: 240px;
+    height: 240px;
+  }
+
+  .growth-card {
+    padding: 18px;
+    border-radius: 15px;
+  }
+
+  .growth-card-header h3 {
+    font-size: 16px;
+  }
+
+  .growth-card-footer {
+    gap: 10px;
+  }
+
+  .footer-indicator {
+    font-size: 10px;
+  }
+
+  .floating-card {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  .floating-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .floating-card-top {
+    top: 5px;
+    right: 0;
+  }
+
+  .floating-card-bottom {
+    bottom: 5px;
+    left: 0;
+  }
+}

@@ -5,7 +5,8 @@ export const routes: Routes = [
   {
     path: '',
     title: 'Home | Prarthana Digital Marketing',
-    children: [],
+    loadComponent: () =>
+      import('./features/home/home').then((m) => m.Home),
   },
   {
     path: 'about',
