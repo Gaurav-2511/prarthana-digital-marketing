@@ -1,0 +1,40 @@
+﻿# Angular / Node.js
+**/node_modules/
+**/dist/
+**/.angular/
+**/out-tsc/
+**/coverage/
+
+# Java / Maven
+**/target/
+
+# Environment variables and secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local secrets and configuration
+**/application-local.properties
+**/application-secrets.properties
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
