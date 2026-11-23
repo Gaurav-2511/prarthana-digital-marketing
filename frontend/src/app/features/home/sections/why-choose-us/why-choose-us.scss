@@ -1,0 +1,147 @@
+
+.why-choose-section {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.section-heading {
+  max-width: 700px;
+  margin: 0 auto 55px;
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    background: #f1edff;
+    color: #7041d8;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+
+    i {
+      font-size: 15px;
+    }
+  }
+
+  h2 {
+    margin-bottom: 18px;
+    color: #21143d;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.25;
+
+    span {
+      color: #7545df;
+    }
+  }
+
+  p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #716b7e;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+}
+
+.feature-card {
+  position: relative;
+  height: 100%;
+  padding: 35px 25px;
+  border: 1px solid #eee9f8;
+  border-radius: 18px;
+  background: #ffffff;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: #d9ccff;
+    box-shadow: 0 18px 40px rgba(75, 43, 135, 0.10);
+
+    .feature-icon {
+      background: #7545df;
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+  }
+
+  .feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    background: #f1edff;
+    color: #7545df;
+    font-size: 27px;
+    transition: all 0.3s ease;
+  }
+
+  h3 {
+    margin-bottom: 14px;
+    color: #281b43;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  p {
+    margin-bottom: 0;
+    color: #777184;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+}
+
+// Tablet
+@media (max-width: 991.98px) {
+  .why-choose-section {
+    padding: 80px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 45px;
+  }
+}
+
+// Mobile
+@media (max-width: 575.98px) {
+  .why-choose-section {
+    padding: 65px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 35px;
+
+    h2 {
+      font-size: 30px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .feature-card {
+    padding: 28px 23px;
+
+    .feature-icon {
+      width: 55px;
+      height: 55px;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  }
+}
