@@ -3,11 +3,12 @@ import { Hero } from './sections/hero/hero';
 import { AboutPreview } from './sections/about-preview/about-preview';
 import { ServicesPreview } from './sections/services-preview/services-preview';
 import { WhyChooseUs } from './sections/why-choose-us/why-choose-us';
+import { PortfolioPreview } from './sections/portfolio-preview/portfolio-preview';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Hero, AboutPreview, ServicesPreview, WhyChooseUs],
+  imports: [Hero, AboutPreview, ServicesPreview, WhyChooseUs,PortfolioPreview],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
