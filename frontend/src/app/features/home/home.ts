@@ -4,12 +4,13 @@ import { AboutPreview } from './sections/about-preview/about-preview';
 import { ServicesPreview } from './sections/services-preview/services-preview';
 import { WhyChooseUs } from './sections/why-choose-us/why-choose-us';
 import { PortfolioPreview } from './sections/portfolio-preview/portfolio-preview';
+import { Cta } from './sections/cta/cta';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Hero, AboutPreview, ServicesPreview, WhyChooseUs,PortfolioPreview],
+  imports: [Hero, AboutPreview, ServicesPreview, WhyChooseUs, PortfolioPreview, Cta],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home { }
+export class Home {}

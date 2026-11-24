@@ -1,0 +1,275 @@
+
+.cta-section {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.cta-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 65px 70px;
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(120deg, #7545df, #6034c3);
+  box-shadow: 0 20px 45px rgba(75, 43, 135, 0.16);
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+}
+
+.cta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 17px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+
+  i {
+    font-size: 15px;
+  }
+}
+
+.cta-content {
+  h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(30px, 4vw, 43px);
+    font-weight: 700;
+    line-height: 1.3;
+
+    span {
+      display: block;
+      color: #e6d9ff;
+    }
+  }
+
+  p {
+    max-width: 570px;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    line-height: 1.9;
+  }
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.cta-primary-btn,
+.cta-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 25px;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta-primary-btn {
+  background: #ffffff;
+  color: #6034c3;
+
+  &:hover {
+    transform: translateY(-3px);
+    background: #f0eaff;
+    color: #6034c3;
+    box-shadow: 0 8px 20px rgba(35, 15, 80, 0.18);
+  }
+}
+
+.cta-secondary-btn {
+  background: transparent;
+  color: #ffffff;
+
+  &:hover {
+    transform: translateY(-3px);
+    background: #ffffff;
+    color: #6034c3;
+  }
+}
+
+.cta-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 210px;
+  height: 210px;
+  margin-right: 25px;
+}
+
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 155px;
+  height: 155px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.13);
+  color: #ffffff;
+  font-size: 75px;
+  box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.06);
+  animation: rocket-float 3s ease-in-out infinite;
+}
+
+.sparkle {
+  position: absolute;
+  color: #e6d9ff;
+  font-size: 30px;
+}
+
+.sparkle-one {
+  top: 5px;
+  right: 25px;
+}
+
+.sparkle-two {
+  bottom: 20px;
+  left: 5px;
+  font-size: 38px;
+}
+
+.sparkle-three {
+  top: 50%;
+  right: -5px;
+  font-size: 20px;
+}
+
+.cta-decoration {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.decoration-one {
+  top: -150px;
+  right: 100px;
+  width: 350px;
+  height: 350px;
+}
+
+.decoration-two {
+  right: -120px;
+  bottom: -230px;
+  width: 450px;
+  height: 450px;
+}
+
+@keyframes rocket-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Tablet
+@media (max-width: 991.98px) {
+  .cta-section {
+    padding: 75px 0;
+  }
+
+  .cta-wrapper {
+    padding: 55px 40px;
+    gap: 20px;
+  }
+
+  .cta-icon {
+    width: 160px;
+    height: 160px;
+    margin-right: 0;
+  }
+
+  .icon-circle {
+    width: 125px;
+    height: 125px;
+    font-size: 60px;
+  }
+}
+
+// Mobile
+@media (max-width: 767.98px) {
+  .cta-section {
+    padding: 60px 0;
+  }
+
+  .cta-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 45px 25px;
+    border-radius: 20px;
+  }
+
+  .cta-content {
+    h2 {
+      font-size: 30px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta-primary-btn,
+  .cta-secondary-btn {
+    width: 100%;
+  }
+
+  .cta-icon {
+    align-self: center;
+    width: 145px;
+    height: 145px;
+    margin: 10px auto 0;
+  }
+
+  .icon-circle {
+    width: 110px;
+    height: 110px;
+    font-size: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-circle {
+    animation: none;
+  }
+
+  .cta-primary-btn,
+  .cta-secondary-btn {
+    transition: none;
+  }
+}
