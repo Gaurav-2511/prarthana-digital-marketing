@@ -16,7 +16,8 @@ export const routes: Routes = [
   {
     path: 'services',
     title: 'Services | Prarthana Digital Marketing',
-    children: [],
+    loadComponent: () =>
+      import('./features/services/services').then((m) => m.Services),
   },
   {
     path: 'portfolio',
