@@ -22,7 +22,8 @@ export const routes: Routes = [
   {
     path: 'portfolio',
     title: 'Portfolio | Prarthana Digital Marketing',
-    children: [],
+    loadComponent: () =>
+      import('./features/portfolio/portfolio').then((m) => m.Portfolio),
   },
   {
     path: 'contact',
