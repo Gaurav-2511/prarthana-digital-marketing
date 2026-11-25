@@ -28,7 +28,8 @@ export const routes: Routes = [
   {
     path: 'contact',
     title: 'Contact Us | Prarthana Digital Marketing',
-    children: [],
+    loadComponent: () =>
+      import('./features/contact/contact').then((m) => m.Contact),
   },
   {
     path: 'admin',
