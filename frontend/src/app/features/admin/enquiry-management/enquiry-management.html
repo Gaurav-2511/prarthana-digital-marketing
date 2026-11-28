@@ -1,0 +1,131 @@
+<section class="enquiry-management">
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">ADMIN DASHBOARD</span>
+      <h1>Enquiries Management</h1>
+      <p>View and manage all customer enquiries received from your website.</p>
+    </div>
+
+    <button type="button" class="btn-refresh" (click)="loadEnquiries()" [disabled]="isLoading()">
+      <i class="bi bi-arrow-clockwise"></i>
+      Refresh
+    </button>
+  </div>
+
+  @if (successMessage()) {
+    <div class="alert alert-success" role="alert">
+      <i class="bi bi-check-circle-fill"></i>
+      {{ successMessage() }}
+    </div>
+  }
+
+  @if (errorMessage()) {
+    <div class="alert alert-danger" role="alert">
+      <i class="bi bi-exclamation-circle-fill"></i>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <div class="summary-card">
+    <div class="summary-icon">
+      <i class="bi bi-envelope-paper"></i>
+    </div>
+    <div>
+      <span>Total Enquiries</span>
+      <h2>{{ enquiries().length }}</h2>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>Loading enquiries...</p>
+    </div>
+  } @else if (enquiries().length === 0) {
+    <div class="empty-state">
+      <i class="bi bi-inbox"></i>
+      <h3>No Enquiries Found</h3>
+      <p>New customer enquiries will appear here.</p>
+    </div>
+  } @else {
+    <div class="enquiry-list">
+      @for (enquiry of enquiries(); track enquiry.id) {
+        <article class="enquiry-card">
+          <div class="card-header">
+            <div class="customer-info">
+              <div class="customer-avatar">
+                {{ enquiry.name.charAt(0).toUpperCase() }}
+              </div>
+
+              <div>
+                <h3>{{ enquiry.name }}</h3>
+                <span class="enquiry-date">
+                  {{ enquiry.createdAt | date: 'dd MMM yyyy, hh:mm a' }}
+                </span>
+              </div>
+            </div>
+
+            <span
+              class="status-badge"
+              [class]="'status-badge status-' + enquiry.status.toLowerCase()"
+            >
+              {{ getStatusLabel(enquiry.status) }}
+            </span>
+          </div>
+
+          <div class="enquiry-details">
+            <div class="detail-item">
+              <i class="bi bi-envelope"></i>
+              <a [href]="'mailto:' + enquiry.email">{{ enquiry.email }}</a>
+            </div>
+
+            <div class="detail-item">
+              <i class="bi bi-telephone"></i>
+              <a [href]="'tel:' + enquiry.phone">{{ enquiry.phone }}</a>
+            </div>
+
+            <div class="detail-item subject-detail">
+              <i class="bi bi-chat-left-text"></i>
+              <strong>{{ enquiry.subject }}</strong>
+            </div>
+          </div>
+
+          <div class="message-box">
+            <span>MESSAGE</span>
+            <p>{{ enquiry.message }}</p>
+          </div>
+
+          <div class="card-actions">
+            <div class="status-control">
+              <label [for]="'status-' + enquiry.id">Update Status</label>
+
+              <select
+                [id]="'status-' + enquiry.id"
+                class="form-select"
+                [value]="enquiry.status"
+                (change)="updateStatus(enquiry, $any($event.target).value)"
+                [disabled]="updatingId() === enquiry.id"
+              >
+                <option value="NEW">New</option>
+                <option value="IN_PROGRESS">In Progress</option>
+                <option value="RESOLVED">Resolved</option>
+              </select>
+            </div>
+
+            <button
+              type="button"
+              class="btn-delete"
+              (click)="deleteEnquiry(enquiry)"
+              [disabled]="deletingId() === enquiry.id"
+            >
+              <i class="bi bi-trash"></i>
+              {{ deletingId() === enquiry.id ? 'Deleting...' : 'Delete' }}
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>

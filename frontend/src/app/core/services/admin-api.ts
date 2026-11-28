@@ -1,4 +1,3 @@
-
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,6 +7,12 @@ export interface AdminDashboardResponse {
   status: string;
   message: string;
   access: string;
+  totalServices: number;
+  totalPortfolios: number;
+  totalEnquiries: number;
+  newEnquiries: number;
+  inProgressEnquiries: number;
+  resolvedEnquiries: number;
 }
 
 @Injectable({

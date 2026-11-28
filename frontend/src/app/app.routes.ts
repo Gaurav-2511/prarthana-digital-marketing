@@ -52,6 +52,34 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'services',
+        title: 'Services Management | Prarthana Digital Marketing',
+        canActivate: [adminGuard],
+        loadComponent: () =>
+          import('./features/admin/service-management/service-management').then(
+            (m) => m.ServiceManagement
+          ),
+      },
+      {
+        path: 'portfolio',
+        title: 'Portfolio Management | Prarthana Digital Marketing',
+        canActivate: [adminGuard],
+        loadComponent: () =>
+          import(
+            './features/admin/portfolio-management/portfolio-management'
+          ).then((m) => m.PortfolioManagement),
+      },
+      {
+        path: 'enquiries',
+        title: 'Enquiries Management | Prarthana Digital Marketing',
+        canActivate: [adminGuard],
+        loadComponent: () =>
+          import('./features/admin/enquiry-management/enquiry-management').then(
+            (m) => m.EnquiryManagement
+          ),
+      },
+
+      {
         path: '',
         redirectTo: 'login',
         pathMatch: 'full',

@@ -52,13 +52,80 @@
         <div>
           <span class="welcome-label">WELCOME BACK</span>
           <h2>Hello, {{ username() }}!</h2>
-          <p>
-            {{ dashboardData()?.message }}
-          </p>
+          <p>{{ dashboardData()?.message }}</p>
         </div>
 
         <div class="welcome-icon">
           <i class="bi bi-speedometer2"></i>
+        </div>
+      </section>
+
+      <section class="statistics-section">
+        <div class="statistics-heading">
+          <h2>Website Statistics</h2>
+          <p>Overview of your website performance and enquiries.</p>
+        </div>
+
+        <div class="statistics-grid">
+          <div class="stat-card">
+            <div class="stat-icon services-stat">
+              <i class="bi bi-grid"></i>
+            </div>
+            <div class="stat-info">
+              <p>Total Services</p>
+              <h3>{{ dashboardData()?.totalServices ?? 0 }}</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon portfolio-stat">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <div class="stat-info">
+              <p>Total Portfolio Projects</p>
+              <h3>{{ dashboardData()?.totalPortfolios ?? 0 }}</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon enquiries-stat">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <div class="stat-info">
+              <p>Total Enquiries</p>
+              <h3>{{ dashboardData()?.totalEnquiries ?? 0 }}</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon new-stat">
+              <i class="bi bi-bell"></i>
+            </div>
+            <div class="stat-info">
+              <p>New Enquiries</p>
+              <h3>{{ dashboardData()?.newEnquiries ?? 0 }}</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon progress-stat">
+              <i class="bi bi-hourglass-split"></i>
+            </div>
+            <div class="stat-info">
+              <p>In Progress Enquiries</p>
+              <h3>{{ dashboardData()?.inProgressEnquiries ?? 0 }}</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon resolved-stat">
+              <i class="bi bi-check-circle"></i>
+            </div>
+            <div class="stat-info">
+              <p>Resolved Enquiries</p>
+              <h3>{{ dashboardData()?.resolvedEnquiries ?? 0 }}</h3>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -67,32 +134,41 @@
         <p class="section-description">Manage your website content and enquiries.</p>
 
         <div class="management-grid">
-          <div class="management-card">
+          <a class="management-card management-card-link" routerLink="/admin/services">
             <div class="card-icon services-icon">
               <i class="bi bi-grid"></i>
             </div>
             <h3>Services</h3>
             <p>Manage your digital marketing services.</p>
-            <span class="coming-soon">Management Coming Soon</span>
-          </div>
+            <span class="manage-link">
+              Manage Services
+              <i class="bi bi-arrow-right"></i>
+            </span>
+          </a>
 
-          <div class="management-card">
+          <a class="management-card management-card-link" routerLink="/admin/portfolio">
             <div class="card-icon portfolio-icon">
               <i class="bi bi-briefcase"></i>
             </div>
             <h3>Portfolio</h3>
             <p>Manage your projects and portfolio.</p>
-            <span class="coming-soon">Management Coming Soon</span>
-          </div>
+            <span class="manage-link">
+              Manage Portfolio
+              <i class="bi bi-arrow-right"></i>
+            </span>
+          </a>
 
-          <div class="management-card">
+          <a class="management-card management-card-link" routerLink="/admin/enquiries">
             <div class="card-icon enquiries-icon">
               <i class="bi bi-envelope"></i>
             </div>
             <h3>Enquiries</h3>
             <p>View and manage customer enquiries.</p>
-            <span class="coming-soon">Management Coming Soon</span>
-          </div>
+            <span class="manage-link">
+              Manage Enquiries
+              <i class="bi bi-arrow-right"></i>
+            </span>
+          </a>
         </div>
       </section>
 
@@ -104,5 +180,7 @@
     </ng-container>
   </main>
 
-  <footer class="dashboard-footer">© 2026 Prarthana Digital Marketing. All rights reserved.</footer>
+  <footer class="dashboard-footer">
+    &copy; 2026 Prarthana Digital Marketing. All rights reserved.
+  </footer>
 </div>

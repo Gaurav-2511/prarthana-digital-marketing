@@ -1,0 +1,301 @@
+<div class="portfolio-management-page">
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">ADMIN PANEL</span>
+      <h1>Portfolio Management</h1>
+      <p>Manage your portfolio projects and showcase your work.</p>
+    </div>
+
+    <button
+      type="button"
+      class="btn-primary-custom"
+      (click)="openAddForm()"
+      [disabled]="showForm()"
+    >
+      <i class="bi bi-plus-lg"></i>
+      Add Portfolio
+    </button>
+  </div>
+
+  @if (successMessage()) {
+    <div class="alert-message success-message" role="status">
+      <i class="bi bi-check-circle-fill"></i>
+      {{ successMessage() }}
+    </div>
+  }
+
+  @if (errorMessage()) {
+    <div class="alert-message error-message" role="alert">
+      <i class="bi bi-exclamation-circle-fill"></i>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (showForm()) {
+    <section class="form-card">
+      <div class="form-card-header">
+        <div>
+          <h2>{{ isEditing() ? 'Edit Portfolio' : 'Add New Portfolio' }}</h2>
+          <p>Enter the portfolio project details below.</p>
+        </div>
+
+        <button
+          type="button"
+          class="btn-close-custom"
+          aria-label="Close form"
+          (click)="cancelForm()"
+        >
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <form #portfolioForm="ngForm" (ngSubmit)="savePortfolio()">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="title">Project Title <span>*</span></label>
+            <input
+              id="title"
+              type="text"
+              name="title"
+              [(ngModel)]="form.title"
+              (ngModelChange)="onTitleChange()"
+              placeholder="Enter project title"
+              maxlength="150"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="slug">Slug <span>*</span></label>
+            <input
+              id="slug"
+              type="text"
+              name="slug"
+              [(ngModel)]="form.slug"
+              placeholder="project-slug"
+              maxlength="180"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input
+              id="category"
+              type="text"
+              name="category"
+              [(ngModel)]="form.category"
+              placeholder="e.g. SEO, Social Media Marketing"
+              maxlength="100"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="displayOrder">Display Order</label>
+            <input
+              id="displayOrder"
+              type="number"
+              name="displayOrder"
+              [(ngModel)]="form.displayOrder"
+              min="0"
+            />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="description">Project Description</label>
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="form.description"
+              rows="4"
+              placeholder="Enter project description"
+            ></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="imageUrl">Project Image URL</label>
+            <input
+              id="imageUrl"
+              type="url"
+              name="imageUrl"
+              [(ngModel)]="form.imageUrl"
+              placeholder="https://example.com/image.jpg"
+              maxlength="500"
+            />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="projectUrl">Project Website URL</label>
+            <input
+              id="projectUrl"
+              type="url"
+              name="projectUrl"
+              [(ngModel)]="form.projectUrl"
+              placeholder="https://example.com"
+              maxlength="500"
+            />
+          </div>
+        </div>
+
+        <div class="status-options">
+          <label class="toggle-option">
+            <input type="checkbox" name="featured" [(ngModel)]="form.featured" />
+            <span>
+              <strong>Featured Project</strong>
+              <small>Highlight this project on the website.</small>
+            </span>
+          </label>
+
+          <label class="toggle-option">
+            <input type="checkbox" name="active" [(ngModel)]="form.active" />
+            <span>
+              <strong>Active Project</strong>
+              <small>Show this project on the public website.</small>
+            </span>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="button"
+            class="btn-secondary-custom"
+            (click)="cancelForm()"
+            [disabled]="isSaving()"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn-primary-custom"
+            [disabled]="portfolioForm.invalid || isSaving()"
+          >
+            @if (isSaving()) {
+              <span class="spinner"></span>
+              Saving...
+            } @else {
+              <i class="bi bi-check-lg"></i>
+              {{ isEditing() ? 'Update Portfolio' : 'Save Portfolio' }}
+            }
+          </button>
+        </div>
+      </form>
+    </section>
+  }
+
+  <section class="portfolio-list-card">
+    <div class="list-header">
+      <div>
+        <h2>All Portfolio Projects</h2>
+        <p>View and manage your portfolio entries.</p>
+      </div>
+
+      <span class="count-badge"> {{ portfolios().length }} Projects </span>
+    </div>
+
+    @if (isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading portfolio projects...</p>
+      </div>
+    } @else if (portfolios().length === 0) {
+      <div class="empty-state">
+        <i class="bi bi-briefcase"></i>
+        <h3>No Portfolio Projects Found</h3>
+        <p>Add your first portfolio project to get started.</p>
+        <button type="button" class="btn-primary-custom" (click)="openAddForm()">
+          <i class="bi bi-plus-lg"></i>
+          Add Portfolio
+        </button>
+      </div>
+    } @else {
+      <div class="table-wrapper">
+        <table class="portfolio-table">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Category</th>
+              <th>Featured</th>
+              <th>Status</th>
+              <th>Order</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (portfolio of portfolios(); track portfolio.id) {
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    @if (portfolio.imageUrl) {
+                      <img
+                        [src]="portfolio.imageUrl"
+                        [alt]="portfolio.title"
+                        class="project-thumbnail"
+                      />
+                    } @else {
+                      <div class="project-placeholder">
+                        <i class="bi bi-image"></i>
+                      </div>
+                    }
+
+                    <div>
+                      <strong>{{ portfolio.title }}</strong>
+                      <small>{{ portfolio.slug }}</small>
+                    </div>
+                  </div>
+                </td>
+
+                <td>{{ portfolio.category || '—' }}</td>
+
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-featured]="portfolio.featured"
+                    [class.status-neutral]="!portfolio.featured"
+                  >
+                    {{ portfolio.featured ? 'Featured' : 'Standard' }}
+                  </span>
+                </td>
+
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-active]="portfolio.active"
+                    [class.status-inactive]="!portfolio.active"
+                  >
+                    {{ portfolio.active ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+
+                <td>{{ portfolio.displayOrder }}</td>
+
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      type="button"
+                      class="btn-edit"
+                      (click)="editPortfolio(portfolio)"
+                      aria-label="Edit portfolio"
+                    >
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn-delete"
+                      (click)="deletePortfolio(portfolio)"
+                      aria-label="Delete portfolio"
+                    >
+                      <i class="bi bi-trash3"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</div>

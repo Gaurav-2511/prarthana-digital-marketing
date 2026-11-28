@@ -149,9 +149,9 @@
   }
 }
 
-/* Contact CTA Card */
+/* Enquiry Form Card */
 .contact-card {
-  padding: 48px 42px;
+  padding: 42px;
   border: 1px solid #eee7fa;
   border-radius: 20px;
   background: #fcfaff;
@@ -171,7 +171,7 @@
   }
 
   h2 {
-    margin-bottom: 18px;
+    margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
     font-size: clamp(25px, 3vw, 32px);
     font-weight: 700;
@@ -186,6 +186,64 @@
   }
 }
 
+/* Form Fields */
+.enquiry-card {
+  .form-label {
+    margin-bottom: 8px;
+    color: #39304d;
+    font-size: 13px;
+    font-weight: 600;
+
+    span {
+      color: #dc3545;
+    }
+  }
+
+  .form-control {
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #e5dcf2;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #29213d;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    box-shadow: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &::placeholder {
+      color: #aaa2b5;
+    }
+
+    &:focus {
+      border-color: #7540cf;
+      box-shadow: 0 0 0 3px rgba(117, 64, 207, 0.12);
+    }
+
+    &.is-invalid {
+      border-color: #dc3545;
+    }
+  }
+
+  textarea.form-control {
+    min-height: 125px;
+    resize: vertical;
+  }
+
+  .invalid-feedback {
+    font-size: 12px;
+  }
+
+  .alert {
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* Buttons */
 .contact-btn,
 .bottom-btn {
   display: inline-flex;
@@ -201,10 +259,20 @@
   font-weight: 600;
   transition: all 0.3s ease;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: #5d2eaf;
     color: #ffffff;
     transform: translateY(-3px);
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 25px;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
   }
 }
 
@@ -212,8 +280,8 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  margin-top: 28px;
-  padding-top: 20px;
+  margin-top: 25px;
+  padding-top: 18px;
   border-top: 1px solid #eee7fa;
   color: #817a8c;
   font-size: 12px;
@@ -221,6 +289,37 @@
   i {
     color: #7540cf;
     font-size: 16px;
+  }
+}
+
+/* WhatsApp Alternative */
+.whatsapp-alternative {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #e9e1f5;
+  border-radius: 13px;
+  background: #ffffff;
+  text-align: center;
+
+  p {
+    margin-bottom: 12px;
+    color: #777080;
+    font-size: 13px;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: #7540cf;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      color: #5d2eaf;
+    }
   }
 }
 
@@ -305,7 +404,7 @@
   }
 
   .contact-card {
-    padding: 35px 23px;
+    padding: 30px 20px;
 
     h2 {
       font-size: 25px;
@@ -314,6 +413,10 @@
     > p {
       font-size: 14px;
     }
+  }
+
+  .whatsapp-alternative {
+    padding: 18px 12px;
   }
 
   .contact-bottom {

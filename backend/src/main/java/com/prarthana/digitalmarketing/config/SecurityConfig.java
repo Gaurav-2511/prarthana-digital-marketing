@@ -31,29 +31,30 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/health", "/api/auth/**").permitAll()
 
-                        .requestMatchers(HttpMethod.GET,
-                                "/api/services/**",
-                                "/api/portfolios/**").permitAll()
+                        // Public: Submit enquiry
+                        .requestMatchers(HttpMethod.POST, "/api/enquiries").permitAll()
 
+                        // Public: View active services and portfolios
+                        .requestMatchers(HttpMethod.GET, "/api/services/**", "/api/portfolios/**").permitAll()
+
+                        // Admin: Enquiry management
+                        .requestMatchers(HttpMethod.GET, "/api/enquiries", "/api/enquiries/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/enquiries/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/enquiries/**").hasRole("ADMIN")
+
+                        // Admin: Services and portfolio management
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-
-                        .requestMatchers(HttpMethod.POST,
-                                "/api/services/**",
-                                "/api/portfolios/**").hasRole("ADMIN")
-
-                        .requestMatchers(HttpMethod.PUT,
-                                "/api/services/**",
-                                "/api/portfolios/**").hasRole("ADMIN")
-
-                        .requestMatchers(HttpMethod.DELETE,
-                                "/api/services/**",
-                                "/api/portfolios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/services/**", "/api/portfolios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/services/**", "/api/portfolios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/services/**", "/api/portfolios/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )
+
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt
                                 .jwtAuthenticationConverter(jwtAuthenticationConverter())

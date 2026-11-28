@@ -1,0 +1,228 @@
+<div class="service-management">
+  <header class="page-header">
+    <div>
+      <span class="eyebrow">ADMIN PANEL</span>
+      <h1>Services Management</h1>
+      <p>Add, update and manage your website services.</p>
+    </div>
+
+    <button type="button" class="btn-primary" (click)="openAddForm()" [disabled]="showForm()">
+      <i class="bi bi-plus-lg"></i>
+      Add New Service
+    </button>
+  </header>
+
+  <div class="alert alert-success" *ngIf="successMessage()">
+    <i class="bi bi-check-circle"></i>
+    {{ successMessage() }}
+  </div>
+
+  <div class="alert alert-danger" *ngIf="errorMessage()">
+    <i class="bi bi-exclamation-circle"></i>
+    {{ errorMessage() }}
+  </div>
+
+  <section class="form-card" *ngIf="showForm()">
+    <div class="form-heading">
+      <div>
+        <h2>{{ isEditing() ? 'Edit Service' : 'Add New Service' }}</h2>
+        <p>Enter the service details below.</p>
+      </div>
+
+      <button type="button" class="close-btn" aria-label="Close form" (click)="cancelForm()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <form #serviceForm="ngForm" (ngSubmit)="saveService()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="title">Service Title *</label>
+          <input
+            id="title"
+            type="text"
+            name="title"
+            [(ngModel)]="form.title"
+            (ngModelChange)="onTitleChange()"
+            required
+            maxlength="150"
+            placeholder="e.g. Search Engine Optimization"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="slug">URL Slug *</label>
+          <input
+            id="slug"
+            type="text"
+            name="slug"
+            [(ngModel)]="form.slug"
+            required
+            maxlength="180"
+            placeholder="search-engine-optimization"
+          />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="shortDescription">Short Description</label>
+          <textarea
+            id="shortDescription"
+            name="shortDescription"
+            [(ngModel)]="form.shortDescription"
+            maxlength="500"
+            rows="2"
+            placeholder="Write a short description..."
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="description">Full Description</label>
+          <textarea
+            id="description"
+            name="description"
+            [(ngModel)]="form.description"
+            rows="4"
+            placeholder="Write the complete service description..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="icon">Bootstrap Icon Name</label>
+          <input
+            id="icon"
+            type="text"
+            name="icon"
+            [(ngModel)]="form.icon"
+            maxlength="100"
+            placeholder="e.g. bi bi-search"
+          />
+          <small>Enter the Bootstrap Icons class name.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="displayOrder">Display Order *</label>
+          <input
+            id="displayOrder"
+            type="number"
+            name="displayOrder"
+            [(ngModel)]="form.displayOrder"
+            required
+            min="0"
+          />
+        </div>
+
+        <div class="form-group status-group">
+          <label for="active">Service Status</label>
+          <label class="toggle-label">
+            <input id="active" type="checkbox" name="active" [(ngModel)]="form.active" />
+            <span>{{ form.active ? 'Active' : 'Inactive' }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancelForm()">Cancel</button>
+
+        <button type="submit" class="btn-primary" [disabled]="serviceForm.invalid || isSaving()">
+          <span *ngIf="isSaving()" class="spinner-border spinner-border-sm"></span>
+          {{ isSaving() ? 'Saving...' : isEditing() ? 'Update Service' : 'Save Service' }}
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="services-card">
+    <div class="list-heading">
+      <div>
+        <h2>All Services</h2>
+        <p>{{ services().length }} service(s) found</p>
+      </div>
+
+      <button
+        type="button"
+        class="refresh-btn"
+        (click)="loadServices()"
+        [disabled]="isLoading()"
+        aria-label="Refresh services"
+      >
+        <i class="bi bi-arrow-clockwise"></i>
+        Refresh
+      </button>
+    </div>
+
+    <div class="loading-state" *ngIf="isLoading()">
+      <span class="spinner-border text-primary"></span>
+      <p>Loading services...</p>
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading() && services().length === 0">
+      <i class="bi bi-grid"></i>
+      <h3>No Services Found</h3>
+      <p>Add your first service to get started.</p>
+    </div>
+
+    <div class="table-responsive" *ngIf="!isLoading() && services().length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Slug</th>
+            <th>Display Order</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let service of services()">
+            <td>
+              <div class="service-title">
+                <i *ngIf="service.icon" [class]="service.icon"></i>
+                <span>{{ service.title }}</span>
+              </div>
+              <small>{{ service.shortDescription || 'No short description' }}</small>
+            </td>
+
+            <td class="slug-cell">{{ service.slug }}</td>
+
+            <td>{{ service.displayOrder }}</td>
+
+            <td>
+              <span
+                class="status-badge"
+                [class.active]="service.active"
+                [class.inactive]="!service.active"
+              >
+                {{ service.active ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+
+            <td>
+              <div class="action-buttons">
+                <button
+                  type="button"
+                  class="edit-btn"
+                  (click)="editService(service)"
+                  aria-label="Edit service"
+                  title="Edit"
+                >
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+
+                <button
+                  type="button"
+                  class="delete-btn"
+                  (click)="deleteService(service)"
+                  aria-label="Delete service"
+                  title="Delete"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
