@@ -10,9 +10,8 @@
       </h1>
 
       <p>
-        Every great project starts with an idea. We are preparing a collection
-        of our creative work and digital experiences. Stay connected to see
-        what we build next.
+        Every great project starts with an idea. Explore our portfolio and discover creative digital
+        experiences.
       </p>
 
       <a routerLink="/contact" class="btn portfolio-btn">
@@ -22,8 +21,67 @@
     </div>
   </div>
 
-  <!-- Portfolio Coming Soon -->
-  <div class="portfolio-content">
+  <!-- Loading State -->
+  <div class="portfolio-content" *ngIf="isLoading()">
+    <div class="container text-center py-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-3">Loading our portfolio...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div class="portfolio-content" *ngIf="!isLoading() && errorMessage()">
+    <div class="container text-center py-5">
+      <p>{{ errorMessage() }}</p>
+    </div>
+  </div>
+
+  <!-- Portfolio Projects -->
+  <div class="portfolio-content" *ngIf="!isLoading() && !errorMessage() && portfolios().length > 0">
+    <div class="container">
+      <div class="portfolio-grid">
+        <div class="portfolio-card" *ngFor="let project of portfolios()">
+          <div class="portfolio-image">
+            <img [src]="project.imageUrl" [alt]="project.title" loading="lazy" />
+
+            <span class="portfolio-category">
+              {{ project.category }}
+            </span>
+          </div>
+
+          <div class="portfolio-card-content">
+            <span *ngIf="project.featured" class="featured-label">
+              <i class="bi bi-star-fill"></i>
+              Featured
+            </span>
+
+            <h3>{{ project.title }}</h3>
+
+            <p>{{ project.description }}</p>
+
+            <a
+              *ngIf="project.projectUrl"
+              [href]="project.projectUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="portfolio-link"
+            >
+              View Project
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div
+    class="portfolio-content"
+    *ngIf="!isLoading() && !errorMessage() && portfolios().length === 0"
+  >
     <div class="container">
       <div class="coming-soon-card">
         <div class="portfolio-icon">
@@ -35,8 +93,8 @@
         <h2>Our Work Is Taking Shape!</h2>
 
         <p>
-          We are working on showcasing our creative projects, digital
-          experiences, and ideas. Our portfolio will be available here soon.
+          We are preparing our creative projects and digital experiences. Our portfolio will be
+          available here soon.
         </p>
 
         <a routerLink="/services" class="portfolio-link">
@@ -52,10 +110,7 @@
     <div class="container">
       <h2>Have a Project in Mind?</h2>
 
-      <p>
-        Let's discuss your ideas and explore how we can help grow your
-        business online.
-      </p>
+      <p>Let's discuss your ideas and explore how we can help grow your business online.</p>
 
       <a routerLink="/contact" class="btn cta-btn">
         Let's Talk

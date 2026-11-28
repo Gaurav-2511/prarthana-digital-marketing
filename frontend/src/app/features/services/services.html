@@ -1,23 +1,17 @@
+
 <!-- Services Hero -->
 <section class="services-hero">
   <div class="container">
     <div class="services-hero-content">
       <span class="section-tag">WHAT WE DO</span>
-
-      <h1>
-        Digital Solutions
-        <span>For Your Business</span>
-      </h1>
-
+      <h1>Digital Solutions <span>For Your Business</span></h1>
       <p>
         Explore digital marketing and creative solutions designed to help
         businesses strengthen their online presence, connect with their
         audience, and move towards their goals.
       </p>
-
       <a routerLink="/contact" class="btn btn-primary-custom">
-        Discuss Your Project
-        <i class="bi bi-arrow-right"></i>
+        Discuss Your Project <i class="bi bi-arrow-right"></i>
       </a>
     </div>
   </div>
@@ -28,149 +22,59 @@
   <div class="container">
     <div class="section-heading text-center">
       <span class="section-tag">OUR SERVICES</span>
-
       <h2 class="section-title">
-        Everything You Need to
-        <span>Grow Online</span>
+        Everything You Need to <span>Grow Online</span>
       </h2>
-
       <p>
         Explore the range of digital solutions that can support your
         business's online journey.
       </p>
     </div>
 
-    <div class="row g-4">
-      <!-- Social Media Marketing -->
-      <div class="col-md-6 col-lg-4">
-        <div class="service-detail-card">
-          <div class="service-detail-icon">
-            <i class="bi bi-share"></i>
-          </div>
-
-          <span class="service-number">01</span>
-
-          <h3>Social Media Marketing</h3>
-
-          <p>
-            Build a consistent social media presence through creative content,
-            audience engagement, and thoughtful platform strategies.
-          </p>
-
-          <a routerLink="/contact" class="service-link">
-            Discuss This Service
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
+    <!-- Loading -->
+    <div *ngIf="isLoading()" class="text-center py-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
+      <p class="mt-3">Loading services...</p>
+    </div>
 
-      <!-- Search Engine Optimization -->
-      <div class="col-md-6 col-lg-4">
+    <!-- Error -->
+    <div
+      *ngIf="!isLoading() && errorMessage()"
+      class="alert alert-danger text-center"
+    >
+      {{ errorMessage() }}
+    </div>
+
+    <!-- Empty State -->
+    <div
+      *ngIf="!isLoading() && !errorMessage() && services().length === 0"
+      class="text-center py-5"
+    >
+      <p>No services are available at the moment.</p>
+    </div>
+
+    <!-- Dynamic Services -->
+    <div
+      *ngIf="!isLoading() && !errorMessage() && services().length > 0"
+      class="row g-4"
+    >
+      <div
+        class="col-md-6 col-lg-4"
+        *ngFor="let service of services(); let i = index"
+      >
         <div class="service-detail-card">
           <div class="service-detail-icon">
-            <i class="bi bi-search"></i>
+            <i [class]="'bi bi-' + (service.icon || 'gear')"></i>
           </div>
 
-          <span class="service-number">02</span>
+          <span class="service-number">
+            {{ (i + 1).toString().padStart(2, '0') }}
+          </span>
 
-          <h3>Search Engine Optimization</h3>
-
-          <p>
-            Improve your website's search visibility through relevant
-            keywords, content optimization, and SEO best practices.
-          </p>
-
-          <a routerLink="/contact" class="service-link">
-            Discuss This Service
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Website Development -->
-      <div class="col-md-6 col-lg-4">
-        <div class="service-detail-card">
-          <div class="service-detail-icon">
-            <i class="bi bi-code-slash"></i>
-          </div>
-
-          <span class="service-number">03</span>
-
-          <h3>Website Development</h3>
-
-          <p>
-            Create responsive and user-friendly websites that communicate
-            your brand and provide a smooth browsing experience.
-          </p>
-
-          <a routerLink="/contact" class="service-link">
-            Discuss This Service
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Paid Advertising -->
-      <div class="col-md-6 col-lg-4">
-        <div class="service-detail-card">
-          <div class="service-detail-icon">
-            <i class="bi bi-megaphone"></i>
-          </div>
-
-          <span class="service-number">04</span>
-
-          <h3>Paid Advertising</h3>
-
-          <p>
-            Reach relevant audiences through planned digital advertising
-            campaigns across suitable online platforms.
-          </p>
-
-          <a routerLink="/contact" class="service-link">
-            Discuss This Service
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Graphic Design -->
-      <div class="col-md-6 col-lg-4">
-        <div class="service-detail-card">
-          <div class="service-detail-icon">
-            <i class="bi bi-palette"></i>
-          </div>
-
-          <span class="service-number">05</span>
-
-          <h3>Graphic Design</h3>
-
-          <p>
-            Communicate your brand visually through creative graphics,
-            promotional designs, and engaging digital creatives.
-          </p>
-
-          <a routerLink="/contact" class="service-link">
-            Discuss This Service
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Content Marketing -->
-      <div class="col-md-6 col-lg-4">
-        <div class="service-detail-card">
-          <div class="service-detail-icon">
-            <i class="bi bi-file-earmark-richtext"></i>
-          </div>
-
-          <span class="service-number">06</span>
-
-          <h3>Content Marketing</h3>
-
-          <p>
-            Share useful and relevant content that communicates your brand's
-            message and helps build meaningful audience connections.
-          </p>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.shortDescription }}</p>
 
           <a routerLink="/contact" class="service-link">
             Discuss This Service
@@ -188,20 +92,15 @@
     <div class="row align-items-center g-5">
       <div class="col-lg-5">
         <span class="section-tag">OUR APPROACH</span>
-
         <h2 class="section-title">
-          Digital Work With
-          <span>Clear Direction</span>
+          Digital Work With <span>Clear Direction</span>
         </h2>
-
         <p>
           Every business has different needs. We believe in understanding
           those needs first and then exploring suitable digital solutions.
         </p>
-
         <a routerLink="/contact" class="btn btn-primary-custom">
-          Let's Talk
-          <i class="bi bi-arrow-right"></i>
+          Let's Talk <i class="bi bi-arrow-right"></i>
         </a>
       </div>
 
@@ -209,45 +108,33 @@
         <div class="service-process-list">
           <div class="service-process-item">
             <span>01</span>
-
             <div>
               <h3>Understand Your Needs</h3>
-              <p>
-                Learn about your business, audience, and objectives.
-              </p>
+              <p>Learn about your business, audience, and objectives.</p>
             </div>
           </div>
 
           <div class="service-process-item">
             <span>02</span>
-
             <div>
               <h3>Explore Solutions</h3>
-              <p>
-                Identify digital services that align with your requirements.
-              </p>
+              <p>Identify digital services that align with your requirements.</p>
             </div>
           </div>
 
           <div class="service-process-item">
             <span>03</span>
-
             <div>
               <h3>Plan the Work</h3>
-              <p>
-                Establish a clear direction and approach for the project.
-              </p>
+              <p>Establish a clear direction and approach for the project.</p>
             </div>
           </div>
 
           <div class="service-process-item">
             <span>04</span>
-
             <div>
               <h3>Review and Improve</h3>
-              <p>
-                Evaluate the work and identify opportunities for improvement.
-              </p>
+              <p>Evaluate the work and identify opportunities for improvement.</p>
             </div>
           </div>
         </div>
@@ -261,20 +148,13 @@
   <div class="container">
     <div class="services-cta-content text-center">
       <span class="section-tag">HAVE A PROJECT IN MIND?</span>
-
-      <h2>
-        Let's Build Your
-        <span>Digital Presence</span>
-      </h2>
-
+      <h2>Let's Build Your <span>Digital Presence</span></h2>
       <p>
         Tell us about your business goals and let's explore the right
         digital solutions for your next step.
       </p>
-
       <a routerLink="/contact" class="btn btn-light-custom">
-        Get In Touch
-        <i class="bi bi-arrow-right"></i>
+        Get In Touch <i class="bi bi-arrow-right"></i>
       </a>
     </div>
   </div>

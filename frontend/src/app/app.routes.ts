@@ -1,4 +1,6 @@
+
 import { Routes } from '@angular/router';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -33,8 +35,28 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    title: 'Admin | Prarthana Digital Marketing',
-    children: [],
+    children: [
+      {
+        path: 'login',
+        title: 'Admin Login | Prarthana Digital Marketing',
+        loadComponent: () =>
+          import('./features/admin/login/login').then((m) => m.Login),
+      },
+      {
+        path: 'dashboard',
+        title: 'Admin Dashboard | Prarthana Digital Marketing',
+        canActivate: [adminGuard],
+        loadComponent: () =>
+          import('./features/admin/dashboard/dashboard').then(
+            (m) => m.Dashboard
+          ),
+      },
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: '**',

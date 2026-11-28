@@ -1,0 +1,108 @@
+<div class="admin-dashboard">
+  <header class="dashboard-header">
+    <div class="brand">
+      <div class="brand-icon">
+        <i class="bi bi-graph-up-arrow"></i>
+      </div>
+
+      <div>
+        <h2>Prarthana<span> Digital</span></h2>
+        <p>Admin Dashboard</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <span class="admin-welcome">
+        <i class="bi bi-person-circle"></i>
+        Welcome, {{ username() }}
+      </span>
+
+      <button class="logout-btn" type="button" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i>
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <div class="page-heading">
+      <div>
+        <h1>Dashboard Overview</h1>
+        <p>Manage your digital marketing website.</p>
+      </div>
+
+      <span class="admin-badge">
+        <i class="bi bi-shield-check"></i>
+        ADMIN
+      </span>
+    </div>
+
+    <div class="dashboard-loading" *ngIf="isLoading()">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p>Loading dashboard...</p>
+    </div>
+
+    <div class="dashboard-error" *ngIf="!isLoading() && errorMessage()">
+      <i class="bi bi-exclamation-circle"></i>
+      {{ errorMessage() }}
+    </div>
+
+    <ng-container *ngIf="!isLoading() && dashboardData()">
+      <section class="welcome-card">
+        <div>
+          <span class="welcome-label">WELCOME BACK</span>
+          <h2>Hello, {{ username() }}!</h2>
+          <p>
+            {{ dashboardData()?.message }}
+          </p>
+        </div>
+
+        <div class="welcome-icon">
+          <i class="bi bi-speedometer2"></i>
+        </div>
+      </section>
+
+      <section class="management-section">
+        <h2>Website Management</h2>
+        <p class="section-description">Manage your website content and enquiries.</p>
+
+        <div class="management-grid">
+          <div class="management-card">
+            <div class="card-icon services-icon">
+              <i class="bi bi-grid"></i>
+            </div>
+            <h3>Services</h3>
+            <p>Manage your digital marketing services.</p>
+            <span class="coming-soon">Management Coming Soon</span>
+          </div>
+
+          <div class="management-card">
+            <div class="card-icon portfolio-icon">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <h3>Portfolio</h3>
+            <p>Manage your projects and portfolio.</p>
+            <span class="coming-soon">Management Coming Soon</span>
+          </div>
+
+          <div class="management-card">
+            <div class="card-icon enquiries-icon">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <h3>Enquiries</h3>
+            <p>View and manage customer enquiries.</p>
+            <span class="coming-soon">Management Coming Soon</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="backend-status">
+        <span class="status-indicator"></span>
+        Backend Connection: {{ dashboardData()?.status }}
+        <span class="access-label"> Access: {{ dashboardData()?.access }} </span>
+      </section>
+    </ng-container>
+  </main>
+
+  <footer class="dashboard-footer">© 2026 Prarthana Digital Marketing. All rights reserved.</footer>
+</div>
